@@ -98,7 +98,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link to="/#visit-us" className="hover:text-caramel transition-colors">
-                  FAQs & Contact
+                  Store Contact
                 </Link>
               </li>
             </ul>
