@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+/*
+ * =================================================================
+ * Catopia Café Design Tokens
+ * Extracted from the e-commerce reference design, re-themed for
+ * a warm, cozy cat cafe palette.
+ *
+ * Colors:   cream, latte, caramel, espresso, blush
+ * Fonts:    Playfair Display (headings), Inter (body)
+ * Radii:    sm=6, md=10, lg=16, xl=24, full=9999
+ * Spacing:  4px base scale (Tailwind default)
+ * Shadows:  soft warm shadows (reference style)
+ * Grid:     max-w 1280px container, 3-col and 4-col product grids
+ * =================================================================
+ */
+
+@theme {
+  /* ---- Brand Colors ---- */
+  --color-cream: #FFF8F0;
+  --color-cream-dark: #F5EDE3;
+  --color-latte: #F0E6D6;
+  --color-latte-dark: #E0D2BF;
+  --color-caramel: #D4883E;
+  --color-caramel-light: #E8A45C;
+  --color-caramel-dark: #B86E2A;
+  --color-espresso: #3D2B1F;
+  --color-espresso-light: #5C4033;
+  --color-blush: #F5D0C5;
+  --color-blush-dark: #E8B0A0;
+  --color-sage: #A8B5A0;
+
+  /* ---- Semantic Colors (shadcn-compatible) ---- */
+  --color-background: #FFF8F0;
+  --color-foreground: #3D2B1F;
+  --color-card: #FFFFFF;
+  --color-card-foreground: #3D2B1F;
+  --color-popover: #FFFFFF;
+  --color-popover-foreground: #3D2B1F;
+  --color-primary: #D4883E;
+  --color-primary-foreground: #FFFFFF;
+  --color-secondary: #F0E6D6;
+  --color-secondary-foreground: #3D2B1F;
+  --color-muted: #F5EDE3;
+  --color-muted-foreground: #8B7355;
+  --color-accent: #F0E6D6;
+  --color-accent-foreground: #3D2B1F;
+  --color-destructive: #DC2626;
+  --color-destructive-foreground: #FFFFFF;
+  --color-border: #E8DDD0;
+  --color-input: #E8DDD0;
+  --color-ring: #D4883E;
+
+  /* ---- Status Badge Colors ---- */
+  --color-status-paid: #16A34A;
+  --color-status-paid-bg: #DCFCE7;
+  --color-status-pending: #CA8A04;
+  --color-status-pending-bg: #FEF9C3;
+  --color-status-failed: #DC2626;
+  --color-status-failed-bg: #FEE2E2;
+  --color-status-refunded: #7C3AED;
+  --color-status-refunded-bg: #F3E8FF;
+
+  /* ---- Typography ---- */
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  /* ---- Border Radius (reference design) ---- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+
+  /* ---- Shadows (warm-tinted) ---- */
+  --shadow-sm: 0 1px 2px rgba(61, 43, 31, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(61, 43, 31, 0.07), 0 2px 4px -2px rgba(61, 43, 31, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(61, 43, 31, 0.08), 0 4px 6px -4px rgba(61, 43, 31, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(61, 43, 31, 0.1), 0 8px 10px -6px rgba(61, 43, 31, 0.05);
+  --shadow-card: 0 2px 8px rgba(61, 43, 31, 0.06);
+  --shadow-card-hover: 0 8px 24px rgba(61, 43, 31, 0.12);
+
+  /* ---- Container ---- */
+  --container-lg: 1280px;
+  --container-md: 1024px;
+}
+
+/* ---- Base Styles ---- */
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Heading Typography ---- */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+/* ---- Mapbox overrides ---- */
+.mapboxgl-popup-content {
+  border-radius: var(--radius-lg) !important;
+  padding: 16px !important;
+  font-family: var(--font-sans) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.mapboxgl-popup-close-button {
+  font-size: 18px;
+  padding: 4px 8px;
+  color: var(--color-muted-foreground);
+}
+
+.mapboxgl-popup-close-button:hover {
+  color: var(--color-foreground);
+  background: transparent;
+}
+
+/* ---- Skeleton animation ---- */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-muted) 25%,
+    var(--color-cream) 50%,
+    var(--color-muted) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius-md);
+}
+
+/* ---- Utility classes for the design ---- */
+.section-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-caramel);
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--color-espresso);
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 2.5rem;
+  }
+}
+
+/* ---- Scrollbar styling ---- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-latte-dark);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-caramel);
+}
